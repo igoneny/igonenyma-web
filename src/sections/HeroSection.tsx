@@ -65,18 +65,18 @@ export default function HeroSection() {
           </FadeIn>
         </div>
 
-        {/* Opening photo */}
-        <motion.div
-          style={{ clipPath, scale }}
-          className="pointer-events-none absolute left-1/2 top-1/2 z-10 w-[300px] -translate-x-1/2 -translate-y-1/2 sm:bottom-0 sm:top-auto sm:w-[460px] sm:translate-y-0 md:w-[620px] lg:w-[760px]"
-        >
-          <img
-            src={HERO_IMG}
-            alt="Igone Nogales"
-            className="h-auto w-full select-none"
-            draggable={false}
-          />
-        </motion.div>
+        {/* Opening photo — outer div centers it (plain CSS), inner motion.div
+            handles the clip-path + scale so the transforms don't collide. */}
+        <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 w-[300px] -translate-x-1/2 -translate-y-1/2 sm:bottom-0 sm:top-auto sm:w-[460px] sm:translate-y-0 md:w-[620px] lg:w-[760px]">
+          <motion.div style={{ clipPath, scale }}>
+            <img
+              src={HERO_IMG}
+              alt="Igone Nogales"
+              className="h-auto w-full select-none"
+              draggable={false}
+            />
+          </motion.div>
+        </div>
 
         {/* Bottom bar */}
         <div className="z-20 mt-auto flex items-end justify-between px-6 pb-7 sm:pb-8 md:px-10 md:pb-10">
