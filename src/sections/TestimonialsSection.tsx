@@ -84,47 +84,59 @@ interface CardProps {
 }
 
 function Card({ testimonial, index, total, progress }: CardProps) {
-  const start = index / (total + 1);
-  const end = (index + 1) / (total + 1);
-  const rotateRange: [number, number] = [start - 1.5, end / 1.5];
+  // Cards rise from below and stack to the front, one at a time, as you scroll.
+  const span = Math.max(1, total - 1);
+  const entryStart = index === 0 ? 0 : (index - 1) / span;
+  const entryEnd = index === 0 ? 0.0001 : index / span;
 
-  const y = useTransform(progress, [start, end], ['0%', '-180%']);
-  const rotate = useTransform(progress, rotateRange, [-index + 90, 0]);
-  const transform = useMotionTemplate`translateZ(${index * 10}px) translateY(${y}) rotate(${rotate}deg)`;
+  const y = useTransform(progress, [entryStart, entryEnd], [
+    index === 0 ? '0%' : '120%',
+    '0%',
+  ]);
+  const rotate = useTransform(progress, [entryStart, entryEnd], [
+    index === 0 ? 0 : 6,
+    0,
+  ]);
+  const opacity = useTransform(
+    progress,
+    [entryStart, entryStart + (entryEnd - entryStart) * 0.35],
+    [index === 0 ? 1 : 0, 1]
+  );
+  const transform = useMotionTemplate`translateY(${y}) rotate(${rotate}deg)`;
 
   return (
-    <motion.div
-      style={{
-        top: index * 12,
-        transform,
-        backfaceVisibility: 'hidden',
-        zIndex: (total - index) * 10,
-      }}
-      className="absolute inset-x-0 mx-auto flex w-full flex-col items-center justify-center gap-6 rounded-2xl border border-black/10 bg-white p-8 text-center will-change-transform sm:p-10"
+    <div
+      className="absolute inset-x-0"
+      style={{ top: index * 14, zIndex: index + 1 }}
     >
-      <ReviewStars rating={testimonial.rating} />
-      <p
-        className="font-light leading-relaxed text-black"
-        style={{ fontSize: 'clamp(1.05rem, 2vw, 1.5rem)' }}
+      <motion.div
+        style={{ transform, opacity, backfaceVisibility: 'hidden' }}
+        className="flex w-full flex-col items-center justify-center gap-6 rounded-2xl border border-black/10 bg-white p-8 text-center shadow-2xl will-change-transform sm:p-10"
       >
-        “{testimonial.quote}”
-      </p>
-      <div className="flex items-center gap-3">
-        {testimonial.avatar && (
-          <img
-            src={testimonial.avatar}
-            alt={testimonial.name}
-            className="size-12 rounded-full object-cover"
-          />
-        )}
-        <div className="text-left">
-          <p className="font-medium uppercase tracking-wide text-black">
-            {testimonial.name}
-          </p>
-          <p className="text-sm text-black/50">{testimonial.role}</p>
+        <ReviewStars rating={testimonial.rating} />
+        <p
+          className="font-light leading-relaxed text-black"
+          style={{ fontSize: 'clamp(1.05rem, 2vw, 1.5rem)' }}
+        >
+          “{testimonial.quote}”
+        </p>
+        <div className="flex items-center gap-3">
+          {testimonial.avatar && (
+            <img
+              src={testimonial.avatar}
+              alt={testimonial.name}
+              className="size-12 rounded-full object-cover"
+            />
+          )}
+          <div className="text-left">
+            <p className="font-medium uppercase tracking-wide text-black">
+              {testimonial.name}
+            </p>
+            <p className="text-sm text-black/50">{testimonial.role}</p>
+          </div>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
   );
 }
 
@@ -136,23 +148,26 @@ export default function TestimonialsSection() {
   });
 
   return (
-    <section id="testimonios" className="bg-black px-5 sm:px-8 md:px-10">
+    <section
+      id="testimonios"
+      className="bg-black px-5 pt-[16vh] sm:px-8 md:px-10"
+    >
       <div
         ref={scrollRef}
         className="relative"
         style={{
           perspective: '1000px',
-          height: `${TESTIMONIALS.length * 90 + 70}vh`,
+          height: `${TESTIMONIALS.length * 75 + 25}vh`,
         }}
       >
-        <div className="sticky top-0 flex h-screen flex-col items-center justify-center gap-12 sm:gap-16">
+        <div className="sticky top-0 flex h-screen flex-col items-center justify-center gap-10 sm:gap-14">
           <h2
             className="hero-heading text-center font-black uppercase leading-none tracking-tight"
             style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
           >
             Testimonios
           </h2>
-          <div className="relative h-[360px] w-full max-w-[560px] sm:h-[340px]">
+          <div className="relative h-[340px] w-full max-w-[560px]">
             {TESTIMONIALS.map((t, i) => (
               <Card
                 key={i}
