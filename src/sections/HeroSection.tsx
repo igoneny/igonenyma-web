@@ -16,7 +16,7 @@ const NAV_LINKS = [
 ];
 
 // Igone's real photo (Gaztelugatxe), landscape 16:9.
-const HERO_IMG = '/igone-gaztelugatxe.png';
+const HERO_IMG = '/igone-perfil-ia.png';
 
 export default function HeroSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
