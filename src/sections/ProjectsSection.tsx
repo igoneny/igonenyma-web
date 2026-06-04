@@ -1,6 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import type { CSSProperties } from 'react';
 import type { MotionValue } from 'framer-motion';
 import LiveProjectButton from '../components/LiveProjectButton';
 
@@ -9,46 +8,17 @@ interface Project {
   category: string;
   name: string;
   link: string;
-  palette: [string, string];
+  image: string;
 }
 
-// Featured projects. Each image slot is a styled placeholder for now — drop
-// your real mockups in public/projects/ and replace the <Placeholder> blocks
-// with <img src="/projects/..."> using the same className.
 const PROJECTS: Project[] = [
-  { number: '01', category: 'Web', name: 'Buy From Argentina', link: 'https://buyfromargentina.com/', palette: ['#6B3A1F', '#F4A460'] },
-  { number: '02', category: 'Web', name: 'Digital Developers', link: 'https://digitaldevelopers.es/', palette: ['#2A1408', '#C9622E'] },
-  { number: '03', category: 'Web', name: 'Pro Active Trainer', link: 'https://proactivetrainer.com/', palette: ['#5B2A14', '#E35336'] },
-  { number: '04', category: 'Centro de nutrición · Web', name: 'Nutrialde', link: 'https://www.nutrialde.com/', palette: ['#3A2410', '#A0522D'] },
+  { number: '01', category: 'Web', name: 'Buy From Argentina', link: 'https://buyfromargentina.com/', image: '/buyfrom-03.png' },
+  { number: '02', category: 'Web', name: 'Digital Developers', link: 'https://digitaldevelopers.es/', image: '/digitaldev-02.png' },
+  { number: '03', category: 'Web', name: 'Pro Active Trainer', link: 'https://proactivetrainer.com/', image: '/Proactivetrainer-portada.png' },
+  { number: '04', category: 'Centro de nutrición · Web', name: 'Nutrialde', link: 'https://www.nutrialde.com/', image: '/nutrialde-web.png' },
 ];
 
-const IMG_RADIUS = 'rounded-[40px] sm:rounded-[50px] md:rounded-[60px]';
-
-function Placeholder({
-  palette,
-  label,
-  style,
-  className,
-}: {
-  palette: [string, string];
-  label: string;
-  style?: CSSProperties;
-  className?: string;
-}) {
-  return (
-    <div
-      className={`flex items-end p-5 ${IMG_RADIUS} ${className ?? ''}`}
-      style={{
-        background: `linear-gradient(135deg, ${palette[0]} 0%, ${palette[1]} 100%)`,
-        ...style,
-      }}
-    >
-      <span className="text-xs font-light uppercase tracking-widest text-white/60">
-        {label}
-      </span>
-    </div>
-  );
-}
+const RADIUS = 'rounded-[40px] sm:rounded-[50px] md:rounded-[60px]';
 
 interface CardProps {
   project: Project;
@@ -66,10 +36,10 @@ function Card({ project, index, total, progress }: CardProps) {
     <div className="sticky top-24 flex h-[85vh] items-center justify-center md:top-32">
       <motion.div
         style={{ scale, top: `${index * 28}px` }}
-        className="relative w-full rounded-[40px] border-2 border-[#F2E7D3] p-4 sm:rounded-[50px] sm:p-6 md:rounded-[60px] md:p-8"
+        className={`relative w-full border-2 border-[#F2E7D3] p-4 sm:p-6 md:p-8 ${RADIUS}`}
       >
         <div
-          className="absolute inset-0 -z-10 rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
+          className={`absolute inset-0 -z-10 ${RADIUS}`}
           style={{ background: '#1A120B' }}
         />
 
@@ -97,28 +67,14 @@ function Card({ project, index, total, progress }: CardProps) {
           <LiveProjectButton href={project.link} />
         </div>
 
-        {/* Bottom row — image grid */}
-        <div className="flex gap-3 sm:gap-4 md:gap-5">
-          <div className="flex w-2/5 flex-col gap-3 sm:gap-4 md:gap-5">
-            <Placeholder
-              palette={project.palette}
-              label={`${project.name} · 01`}
-              style={{ height: 'clamp(130px, 16vw, 230px)' }}
-            />
-            <Placeholder
-              palette={[project.palette[1], project.palette[0]]}
-              label={`${project.name} · 02`}
-              style={{ height: 'clamp(160px, 22vw, 340px)' }}
-            />
-          </div>
-          <div className="w-3/5">
-            <Placeholder
-              palette={project.palette}
-              label={`${project.name} · 03`}
-              className="h-full"
-            />
-          </div>
-        </div>
+        {/* Project mockup */}
+        <img
+          src={project.image}
+          alt={`${project.name} — mockup`}
+          loading="lazy"
+          className={`w-full object-cover ${RADIUS}`}
+          style={{ height: 'clamp(220px, 36vw, 480px)' }}
+        />
       </motion.div>
     </div>
   );

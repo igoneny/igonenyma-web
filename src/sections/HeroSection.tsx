@@ -9,9 +9,8 @@ const NAV_LINKS = [
   { label: 'Contacto', href: '#contacto' },
 ];
 
-// Replace /igone-portrait.svg with your real avatar (e.g. drop public/igone.png
-// and change the src below). The magnetic hover effect works with any image.
-const PORTRAIT_URL = '/igone-portrait.svg';
+// Igone's avatar (transparent PNG).
+const PORTRAIT_URL = '/avatar-igone.png';
 
 export default function HeroSection() {
   return (
