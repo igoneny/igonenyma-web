@@ -15,9 +15,8 @@ const NAV_LINKS = [
   { label: 'Contacto', href: '#contacto' },
 ];
 
-// TEMP placeholder so the open effect is visible. Replace with Igone's real
-// photo once uploaded to /public (e.g. '/igone-foto.png').
-const HERO_IMG = '/buyfrom-03.png';
+// Igone's real photo (Gaztelugatxe), landscape 16:9.
+const HERO_IMG = '/igone-gaztelugatxe.png';
 
 export default function HeroSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -69,7 +68,7 @@ export default function HeroSection() {
         {/* Opening photo */}
         <motion.div
           style={{ clipPath, scale }}
-          className="pointer-events-none absolute left-1/2 top-1/2 z-10 w-[280px] -translate-x-1/2 -translate-y-1/2 sm:bottom-0 sm:top-auto sm:w-[360px] sm:translate-y-0 md:w-[440px] lg:w-[520px]"
+          className="pointer-events-none absolute left-1/2 top-1/2 z-10 w-[300px] -translate-x-1/2 -translate-y-1/2 sm:bottom-0 sm:top-auto sm:w-[460px] sm:translate-y-0 md:w-[620px] lg:w-[760px]"
         >
           <img
             src={HERO_IMG}
