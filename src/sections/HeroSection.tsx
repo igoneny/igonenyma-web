@@ -26,10 +26,11 @@ export default function HeroSection() {
   });
 
   // The image "opens" from a small rounded pill to the full photo as you scroll.
-  const insetY = useTransform(scrollYProgress, [0, 0.8], [45, 0]);
-  const insetX = useTransform(scrollYProgress, [0, 0.8], [45, 0]);
+  // Starts ~45% open (inset 27.5% leaves 45% of each dimension visible).
+  const insetY = useTransform(scrollYProgress, [0, 0.8], [27.5, 0]);
+  const insetX = useTransform(scrollYProgress, [0, 0.8], [27.5, 0]);
   const roundedness = useTransform(scrollYProgress, [0, 1], [1000, 16]);
-  const scale = useTransform(scrollYProgress, [0, 0.8], [0.8, 1]);
+  const scale = useTransform(scrollYProgress, [0, 0.8], [0.9, 1]);
   const clipPath = useMotionTemplate`inset(${insetY}% ${insetX}% ${insetY}% ${insetX}% round ${roundedness}px)`;
 
   return (
