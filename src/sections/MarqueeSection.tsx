@@ -11,19 +11,20 @@ interface WorkTile {
 // Your real projects as a scrolling work band. Swap these tiles for image
 // thumbnails once you upload the project mockups (public/projects/*.png).
 const WORK: WorkTile[] = [
-  { name: 'Pro Active Trainer', category: 'Web', year: '2024', from: '#18011F', to: '#7621B0' },
-  { name: 'Bikain', category: 'Restaurante · Web', year: '2025', from: '#1A1A1A', to: '#3A3A3A' },
-  { name: 'Nutraide', category: 'Centro de nutrición', year: '2025', from: '#0E2A1F', to: '#1F7A55' },
-  { name: 'Digital Developers', category: 'Web', year: '2024', from: '#0C1430', to: '#2747B0' },
-  { name: 'kiddyss', category: 'E-commerce', year: '2024', from: '#2A1410', to: '#BE4C00' },
-  { name: 'chetto shoes', category: 'Packaging', year: '2024', from: '#2A0A26', to: '#B600A8' },
-  { name: 'Condrys', category: 'Identidad · Packaging', year: '2024', from: '#2A1A05', to: '#C98A1E' },
-  { name: 'borjas design', category: 'Identidad', year: '2024', from: '#1A0A2A', to: '#7721B1' },
-  { name: 'Automatizaciones e IA', category: 'IA · Workflows', year: '2024–25', from: '#06121A', to: '#1E6E8C' },
+  { name: 'Pro Active Trainer', category: 'Web', year: '2024', from: '#5B2A14', to: '#E35336' },
+  { name: 'Buy From Argentina', category: 'Web', year: '2024', from: '#6B3A1F', to: '#F4A460' },
+  { name: 'Nutrialde', category: 'Centro de nutrición · Web', year: '2025', from: '#3A2410', to: '#A0522D' },
+  { name: 'Digital Developers', category: 'Web', year: '2024', from: '#2A1408', to: '#C9622E' },
+  { name: 'Bikain', category: 'Restaurante · Web', year: '2025', from: '#241A12', to: '#6B4A30' },
+  { name: 'kiddyss', category: 'E-commerce', year: '2024', from: '#5B2A14', to: '#F4A460' },
+  { name: 'chetto shoes', category: 'Packaging', year: '2024', from: '#7A3B1A', to: '#E8A06A' },
+  { name: 'Condrys', category: 'Identidad · Packaging', year: '2024', from: '#A0522D', to: '#F4A460' },
+  { name: 'borjas design', category: 'Identidad', year: '2024', from: '#3A1E0E', to: '#E35336' },
+  { name: 'Automatizaciones e IA', category: 'IA · Workflows', year: '2024–25', from: '#2A1810', to: '#A0522D' },
 ];
 
 const ROW_ONE = [...WORK.slice(0, 5), ...WORK.slice(0, 5), ...WORK.slice(0, 5)];
-const ROW_TWO = [...WORK.slice(5), ...WORK.slice(5), ...WORK.slice(5)];
+const ROW_TWO = [...WORK.slice(5, 10), ...WORK.slice(5, 10), ...WORK.slice(5, 10)];
 
 function Tile({ tile }: { tile: WorkTile }) {
   return (
@@ -73,7 +74,7 @@ export default function MarqueeSection() {
     <section
       ref={sectionRef}
       className="overflow-hidden pb-10 pt-24 sm:pt-32 md:pt-40"
-      style={{ background: '#0C0C0C' }}
+      style={{ background: '#1A120B' }}
     >
       <div className="flex flex-col gap-3">
         {/* Row 1 — scrolls right */}

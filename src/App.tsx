@@ -7,7 +7,7 @@ import ContactSection from './sections/ContactSection';
 
 export default function App() {
   return (
-    <main style={{ background: '#0C0C0C', overflowX: 'clip' }}>
+    <main style={{ background: '#1A120B', overflowX: 'clip' }}>
       <HeroSection />
       <MarqueeSection />
       <AboutSection />

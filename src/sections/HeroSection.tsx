@@ -30,7 +30,7 @@ export default function HeroSection() {
           <a
             key={link.href}
             href={link.href}
-            className="text-sm font-medium uppercase tracking-wider text-[#D7E2EA] transition-opacity duration-200 hover:opacity-70 md:text-lg lg:text-[1.4rem]"
+            className="text-sm font-medium uppercase tracking-wider text-[#F2E7D3] transition-opacity duration-200 hover:opacity-70 md:text-lg lg:text-[1.4rem]"
           >
             {link.label}
           </a>
@@ -73,7 +73,7 @@ export default function HeroSection() {
           as="p"
           delay={0.35}
           y={20}
-          className="max-w-[160px] font-light uppercase leading-snug tracking-wide text-[#D7E2EA] sm:max-w-[220px] md:max-w-[280px]"
+          className="max-w-[160px] font-light uppercase leading-snug tracking-wide text-[#F2E7D3] sm:max-w-[220px] md:max-w-[280px]"
           style={{ fontSize: 'clamp(0.75rem, 1.4vw, 1.5rem)' }}
         >
           desarrolladora web y diseñadora gráfica freelance — nyma studio

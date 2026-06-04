@@ -11,12 +11,13 @@
 html,
 body,
 #root {
-  background: #0c0c0c;
+  background: #1a120b;
   font-family: 'Kanit', sans-serif;
 }
 
+/* Warm "Burnt sienna" heading gradient — sandy to cream, light on dark */
 .hero-heading {
-  background: linear-gradient(180deg, #646973 0%, #bbccd7 100%);
+  background: linear-gradient(180deg, #e8843e 0%, #f5f5dc 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;

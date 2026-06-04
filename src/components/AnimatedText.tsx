@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { Fragment, useRef } from 'react';
 import type { CSSProperties } from 'react';
 import type { MotionValue } from 'framer-motion';
 
@@ -10,9 +10,10 @@ interface AnimatedTextProps {
 }
 
 /**
- * Character-by-character scroll-reveal text. Each character animates its
- * opacity from 0.2 to 1 based on its position in the string relative to the
- * paragraph's scroll progress.
+ * Word-by-word scroll-reveal text. Each word fades from 0.2 to 1 opacity based
+ * on its position relative to the paragraph's scroll progress. Words are
+ * inline-block with real space text nodes between them, so the paragraph wraps
+ * and centers normally instead of overflowing on a single line.
  */
 export default function AnimatedText({
   text,
@@ -25,38 +26,38 @@ export default function AnimatedText({
     offset: ['start 0.8', 'end 0.2'],
   });
 
-  const chars = text.split('');
+  const words = text.split(' ');
 
   return (
     <p ref={container} className={className} style={style}>
-      {chars.map((char, i) => {
-        const start = i / chars.length;
-        const end = start + 1 / chars.length;
+      {words.map((word, i) => {
+        const start = i / words.length;
+        const end = start + 1 / words.length;
         return (
-          <Char key={i} progress={scrollYProgress} range={[start, end]}>
-            {char}
-          </Char>
+          <Fragment key={i}>
+            <Word progress={scrollYProgress} range={[start, end]}>
+              {word}
+            </Word>
+            {i < words.length - 1 ? ' ' : ''}
+          </Fragment>
         );
       })}
     </p>
   );
 }
 
-interface CharProps {
+interface WordProps {
   children: string;
   progress: MotionValue<number>;
   range: [number, number];
 }
 
-function Char({ children, progress, range }: CharProps) {
+function Word({ children, progress, range }: WordProps) {
   const opacity = useTransform(progress, range, [0, 1]);
-  // Preserve spaces so word breaks survive the per-character split.
-  const display = children === ' ' ? ' ' : children;
-
   return (
-    <span className="relative">
-      <span className="absolute left-0 top-0 opacity-20">{display}</span>
-      <motion.span style={{ opacity }}>{display}</motion.span>
+    <span className="relative inline-block">
+      <span className="absolute left-0 top-0 opacity-20">{children}</span>
+      <motion.span style={{ opacity }}>{children}</motion.span>
     </span>
   );
 }

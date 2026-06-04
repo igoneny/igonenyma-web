@@ -8,6 +8,7 @@ interface Project {
   number: string;
   category: string;
   name: string;
+  link: string;
   palette: [string, string];
 }
 
@@ -15,9 +16,10 @@ interface Project {
 // your real mockups in public/projects/ and replace the <Placeholder> blocks
 // with <img src="/projects/..."> using the same className.
 const PROJECTS: Project[] = [
-  { number: '01', category: 'Restaurante · Web', name: 'Bikain', palette: ['#1A1A1A', '#3A3A3A'] },
-  { number: '02', category: 'Centro de nutrición · Web', name: 'Nutraide', palette: ['#0E2A1F', '#1F7A55'] },
-  { number: '03', category: 'Web', name: 'Pro Active Trainer', palette: ['#18011F', '#7621B0'] },
+  { number: '01', category: 'Web', name: 'Buy From Argentina', link: 'https://buyfromargentina.com/', palette: ['#6B3A1F', '#F4A460'] },
+  { number: '02', category: 'Web', name: 'Digital Developers', link: 'https://digitaldevelopers.es/', palette: ['#2A1408', '#C9622E'] },
+  { number: '03', category: 'Web', name: 'Pro Active Trainer', link: 'https://proactivetrainer.com/', palette: ['#5B2A14', '#E35336'] },
+  { number: '04', category: 'Centro de nutrición · Web', name: 'Nutrialde', link: 'https://www.nutrialde.com/', palette: ['#3A2410', '#A0522D'] },
 ];
 
 const IMG_RADIUS = 'rounded-[40px] sm:rounded-[50px] md:rounded-[60px]';
@@ -64,35 +66,35 @@ function Card({ project, index, total, progress }: CardProps) {
     <div className="sticky top-24 flex h-[85vh] items-center justify-center md:top-32">
       <motion.div
         style={{ scale, top: `${index * 28}px` }}
-        className="relative w-full rounded-[40px] border-2 border-[#D7E2EA] p-4 sm:rounded-[50px] sm:p-6 md:rounded-[60px] md:p-8"
+        className="relative w-full rounded-[40px] border-2 border-[#F2E7D3] p-4 sm:rounded-[50px] sm:p-6 md:rounded-[60px] md:p-8"
       >
         <div
           className="absolute inset-0 -z-10 rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
-          style={{ background: '#0C0C0C' }}
+          style={{ background: '#1A120B' }}
         />
 
         {/* Top row */}
         <div className="mb-4 flex flex-wrap items-center justify-between gap-4 sm:mb-6 md:mb-8">
           <div className="flex items-center gap-4 sm:gap-6 md:gap-8">
             <span
-              className="font-black leading-none text-[#D7E2EA]"
+              className="font-black leading-none text-[#F2E7D3]"
               style={{ fontSize: 'clamp(3rem, 10vw, 140px)' }}
             >
               {project.number}
             </span>
             <div className="flex flex-col gap-1">
-              <span className="text-sm font-light uppercase tracking-widest text-[#D7E2EA]/60 sm:text-base">
+              <span className="text-sm font-light uppercase tracking-widest text-[#F2E7D3]/60 sm:text-base">
                 {project.category}
               </span>
               <span
-                className="font-medium uppercase text-[#D7E2EA]"
+                className="font-medium uppercase text-[#F2E7D3]"
                 style={{ fontSize: 'clamp(1rem, 2.2vw, 2.1rem)' }}
               >
                 {project.name}
               </span>
             </div>
           </div>
-          <LiveProjectButton />
+          <LiveProjectButton href={project.link} />
         </div>
 
         {/* Bottom row — image grid */}
@@ -134,7 +136,7 @@ export default function ProjectsSection() {
       id="proyectos"
       ref={container}
       className="relative z-10 -mt-10 rounded-t-[40px] px-5 py-20 sm:-mt-12 sm:rounded-t-[50px] sm:px-8 md:-mt-14 md:rounded-t-[60px] md:px-10"
-      style={{ background: '#0C0C0C' }}
+      style={{ background: '#1A120B' }}
     >
       <h2
         className="hero-heading mb-12 text-center font-black uppercase leading-none tracking-tight sm:mb-16 md:mb-20"
