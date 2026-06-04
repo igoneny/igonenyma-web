@@ -50,7 +50,7 @@ function Tile({ tile }: { tile: WorkTile }) {
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(to top, rgba(26,18,11,0.88) 0%, rgba(26,18,11,0.15) 55%, rgba(26,18,11,0) 100%)',
+                'linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.15) 55%, rgba(0,0,0,0) 100%)',
             }}
           />
         </>
@@ -95,7 +95,7 @@ export default function MarqueeSection() {
     <section
       ref={sectionRef}
       className="overflow-hidden pb-10 pt-24 sm:pt-32 md:pt-40"
-      style={{ background: '#1A120B' }}
+      style={{ background: '#000000' }}
     >
       <div className="flex flex-col gap-3">
         {/* Row 1 — scrolls right */}

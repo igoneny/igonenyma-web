@@ -12,20 +12,20 @@ const SOCIALS = [
 ];
 
 const pill =
-  'flex items-center gap-3 rounded-full border-2 border-[#F2E7D3] px-7 py-3 text-sm font-medium uppercase tracking-widest text-[#F2E7D3] transition-colors duration-200 hover:bg-[#F2E7D3]/10 sm:text-base';
+  'flex items-center gap-3 rounded-full border-2 border-white px-7 py-3 text-sm font-medium uppercase tracking-widest text-white transition-colors duration-200 hover:bg-white/10 sm:text-base';
 
 export default function ContactSection() {
   return (
     <section
       id="contacto"
       className="flex flex-col items-center px-5 py-24 sm:px-8 sm:py-28 md:px-10 md:py-36"
-      style={{ background: '#1A120B' }}
+      style={{ background: '#000000' }}
     >
       <FadeIn
         as="p"
         delay={0}
         y={20}
-        className="mb-6 text-center font-light uppercase tracking-widest text-[#F2E7D3] sm:mb-8"
+        className="mb-6 text-center font-light uppercase tracking-widest text-white sm:mb-8"
         style={{ fontSize: 'clamp(0.9rem, 1.6vw, 1.4rem)' }}
       >
         ¿Trabajamos juntos?
@@ -65,9 +65,9 @@ export default function ContactSection() {
         as="p"
         delay={0.3}
         y={10}
-        className="mt-16 text-center text-xs font-light uppercase tracking-widest text-[#F2E7D3]/40 sm:mt-20"
+        className="mt-16 text-center text-xs font-light uppercase tracking-widest text-white/40 sm:mt-20"
       >
-        nyma studio — Igone Nogales · solo WhatsApp para llamadas
+        nyma studio — Igone Nogales · Todos los derechos reservados
       </FadeIn>
     </section>
   );

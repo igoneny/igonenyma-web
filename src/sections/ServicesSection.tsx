@@ -38,11 +38,11 @@ export default function ServicesSection() {
     <section
       id="servicios"
       className="rounded-t-[40px] px-5 py-20 sm:rounded-t-[50px] sm:px-8 sm:py-24 md:rounded-t-[60px] md:px-10 md:py-32"
-      style={{ background: '#F5F5DC' }}
+      style={{ background: '#FFFFFF' }}
     >
       <h2
         className="mb-16 text-center font-black uppercase sm:mb-20 md:mb-28"
-        style={{ color: '#2A1810', fontSize: 'clamp(3rem, 12vw, 160px)' }}
+        style={{ color: '#000000', fontSize: 'clamp(3rem, 12vw, 160px)' }}
       >
         Servicios
       </h2>
@@ -55,15 +55,15 @@ export default function ServicesSection() {
             y={30}
             className="flex items-start gap-5 py-8 sm:gap-8 sm:py-10 md:py-12"
             style={{
-              borderTop: '1px solid rgba(42, 24, 16, 0.18)',
+              borderTop: '1px solid rgba(0, 0, 0, 0.15)',
               ...(i === SERVICES.length - 1
-                ? { borderBottom: '1px solid rgba(42, 24, 16, 0.18)' }
+                ? { borderBottom: '1px solid rgba(0, 0, 0, 0.15)' }
                 : {}),
             }}
           >
             <span
               className="shrink-0 font-black leading-none"
-              style={{ color: '#2A1810', fontSize: 'clamp(3rem, 10vw, 140px)' }}
+              style={{ color: '#000000', fontSize: 'clamp(3rem, 10vw, 140px)' }}
             >
               {service.number}
             </span>
@@ -71,14 +71,14 @@ export default function ServicesSection() {
             <div className="flex flex-col gap-2 pt-1 sm:gap-3 sm:pt-2 md:pt-4">
               <h3
                 className="font-medium uppercase"
-                style={{ color: '#2A1810', fontSize: 'clamp(1rem, 2.2vw, 2.1rem)' }}
+                style={{ color: '#000000', fontSize: 'clamp(1rem, 2.2vw, 2.1rem)' }}
               >
                 {service.name}
               </h3>
               <p
                 className="max-w-2xl font-light leading-relaxed"
                 style={{
-                  color: '#2A1810',
+                  color: '#000000',
                   opacity: 0.65,
                   fontSize: 'clamp(0.85rem, 1.6vw, 1.25rem)',
                 }}

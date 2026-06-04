@@ -10,7 +10,7 @@ export default function AboutSection() {
     <section
       id="sobre-mi"
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-5 py-20 sm:px-8 md:px-10"
-      style={{ background: '#1A120B' }}
+      style={{ background: '#000000' }}
     >
       <div className="flex w-full max-w-4xl flex-col items-center gap-16 sm:gap-20 md:gap-24">
         <div className="flex w-full flex-col items-center gap-10 sm:gap-14 md:gap-16">
@@ -26,7 +26,7 @@ export default function AboutSection() {
 
           <AnimatedText
             text={PARAGRAPH}
-            className="mx-auto max-w-[640px] text-center font-medium leading-relaxed text-[#F2E7D3]"
+            className="mx-auto max-w-[640px] text-center font-medium leading-relaxed text-white"
             style={{ fontSize: 'clamp(1rem, 2vw, 1.35rem)' }}
           />
         </div>
