@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import type { CSSProperties } from 'react';
 import type { MotionValue } from 'framer-motion';
 import LiveProjectButton from '../components/LiveProjectButton';
 
@@ -7,62 +8,45 @@ interface Project {
   number: string;
   category: string;
   name: string;
-  col1Top: string;
-  col1Bottom: string;
-  col2: string;
+  palette: [string, string];
 }
 
-const cf = (url: string) =>
-  `https://images.higgs.ai/?default=1&output=webp&url=${encodeURIComponent(
-    url
-  )}&w=1280&q=85`;
-
+// Featured projects. Each image slot is a styled placeholder for now — drop
+// your real mockups in public/projects/ and replace the <Placeholder> blocks
+// with <img src="/projects/..."> using the same className.
 const PROJECTS: Project[] = [
-  {
-    number: '01',
-    category: 'Client',
-    name: 'Nextlevel Studio',
-    col1Top: cf(
-      'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260412_055344_5eff02e0-87a5-41ce-b64f-eb08da8f33db.png'
-    ),
-    col1Bottom: cf(
-      'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260412_055431_11d841fd-8b41-46a5-82e4-b04f2407a7d8.png'
-    ),
-    col2: cf(
-      'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260412_055451_e317bf2d-28d4-48cc-86b0-6f72f25b6327.png'
-    ),
-  },
-  {
-    number: '02',
-    category: 'Personal',
-    name: 'Aura Brand Identity',
-    col1Top: cf(
-      'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260412_055654_911201c5-36d9-4bc6-bac7-331adfce159f.png'
-    ),
-    col1Bottom: cf(
-      'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260412_055723_5ceda0b8-d9c2-4665-b2e3-83ba19ba76d1.png'
-    ),
-    col2: cf(
-      'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260412_055753_adc5dcbd-a8e6-49c0-b43a-9b030d835cea.png'
-    ),
-  },
-  {
-    number: '03',
-    category: 'Client',
-    name: 'Solaris Digital',
-    col1Top: cf(
-      'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260412_055759_963cfb0b-4bd1-4b0f-9d0a-09bd6cf95b2f.png'
-    ),
-    col1Bottom: cf(
-      'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260412_060108_438f781a-9846-4dcc-89ab-c4e6cb830f5b.png'
-    ),
-    col2: cf(
-      'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260412_055818_9d062121-ad7e-46b9-999a-1a6a692ef1ee.png'
-    ),
-  },
+  { number: '01', category: 'Restaurante · Web', name: 'Bikain', palette: ['#1A1A1A', '#3A3A3A'] },
+  { number: '02', category: 'Centro de nutrición · Web', name: 'Nutraide', palette: ['#0E2A1F', '#1F7A55'] },
+  { number: '03', category: 'Web', name: 'Pro Active Trainer', palette: ['#18011F', '#7621B0'] },
 ];
 
 const IMG_RADIUS = 'rounded-[40px] sm:rounded-[50px] md:rounded-[60px]';
+
+function Placeholder({
+  palette,
+  label,
+  style,
+  className,
+}: {
+  palette: [string, string];
+  label: string;
+  style?: CSSProperties;
+  className?: string;
+}) {
+  return (
+    <div
+      className={`flex items-end p-5 ${IMG_RADIUS} ${className ?? ''}`}
+      style={{
+        background: `linear-gradient(135deg, ${palette[0]} 0%, ${palette[1]} 100%)`,
+        ...style,
+      }}
+    >
+      <span className="text-xs font-light uppercase tracking-widest text-white/60">
+        {label}
+      </span>
+    </div>
+  );
+}
 
 interface CardProps {
   project: Project;
@@ -80,7 +64,7 @@ function Card({ project, index, total, progress }: CardProps) {
     <div className="sticky top-24 flex h-[85vh] items-center justify-center md:top-32">
       <motion.div
         style={{ scale, top: `${index * 28}px` }}
-        className={`relative w-full rounded-[40px] border-2 border-[#D7E2EA] p-4 sm:rounded-[50px] sm:p-6 md:rounded-[60px] md:p-8`}
+        className="relative w-full rounded-[40px] border-2 border-[#D7E2EA] p-4 sm:rounded-[50px] sm:p-6 md:rounded-[60px] md:p-8"
       >
         <div
           className="absolute inset-0 -z-10 rounded-[40px] sm:rounded-[50px] md:rounded-[60px]"
@@ -114,27 +98,22 @@ function Card({ project, index, total, progress }: CardProps) {
         {/* Bottom row — image grid */}
         <div className="flex gap-3 sm:gap-4 md:gap-5">
           <div className="flex w-2/5 flex-col gap-3 sm:gap-4 md:gap-5">
-            <img
-              src={project.col1Top}
-              alt={`${project.name} preview 1`}
-              loading="lazy"
-              className={`w-full object-cover ${IMG_RADIUS}`}
+            <Placeholder
+              palette={project.palette}
+              label={`${project.name} · 01`}
               style={{ height: 'clamp(130px, 16vw, 230px)' }}
             />
-            <img
-              src={project.col1Bottom}
-              alt={`${project.name} preview 2`}
-              loading="lazy"
-              className={`w-full object-cover ${IMG_RADIUS}`}
+            <Placeholder
+              palette={[project.palette[1], project.palette[0]]}
+              label={`${project.name} · 02`}
               style={{ height: 'clamp(160px, 22vw, 340px)' }}
             />
           </div>
           <div className="w-3/5">
-            <img
-              src={project.col2}
-              alt={`${project.name} preview 3`}
-              loading="lazy"
-              className={`h-full w-full object-cover ${IMG_RADIUS}`}
+            <Placeholder
+              palette={project.palette}
+              label={`${project.name} · 03`}
+              className="h-full"
             />
           </div>
         </div>
@@ -152,6 +131,7 @@ export default function ProjectsSection() {
 
   return (
     <section
+      id="proyectos"
       ref={container}
       className="relative z-10 -mt-10 rounded-t-[40px] px-5 py-20 sm:-mt-12 sm:rounded-t-[50px] sm:px-8 md:-mt-14 md:rounded-t-[60px] md:px-10"
       style={{ background: '#0C0C0C' }}
@@ -160,7 +140,7 @@ export default function ProjectsSection() {
         className="hero-heading mb-12 text-center font-black uppercase leading-none tracking-tight sm:mb-16 md:mb-20"
         style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
       >
-        Project
+        Proyectos
       </h2>
 
       <div className="mx-auto max-w-6xl">

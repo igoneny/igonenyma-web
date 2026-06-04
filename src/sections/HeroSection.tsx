@@ -2,9 +2,16 @@ import FadeIn from '../components/FadeIn';
 import ContactButton from '../components/ContactButton';
 import Magnet from '../components/Magnet';
 
-const NAV_LINKS = ['About', 'Price', 'Projects', 'Contact'];
-const PORTRAIT_URL =
-  'https://shrug-person-78902957.figma.site/_components/v2/d24c01ad3a56fc65e942a1f501eb73db42d7cf9a/Rectangle_40443.81459862.png';
+const NAV_LINKS = [
+  { label: 'Sobre mí', href: '#sobre-mi' },
+  { label: 'Proyectos', href: '#proyectos' },
+  { label: 'Servicios', href: '#servicios' },
+  { label: 'Contacto', href: '#contacto' },
+];
+
+// Replace /igone-portrait.svg with your real avatar (e.g. drop public/igone.png
+// and change the src below). The magnetic hover effect works with any image.
+const PORTRAIT_URL = '/igone-portrait.svg';
 
 export default function HeroSection() {
   return (
@@ -21,11 +28,11 @@ export default function HeroSection() {
       >
         {NAV_LINKS.map((link) => (
           <a
-            key={link}
-            href={`#${link.toLowerCase()}`}
+            key={link.href}
+            href={link.href}
             className="text-sm font-medium uppercase tracking-wider text-[#D7E2EA] transition-opacity duration-200 hover:opacity-70 md:text-lg lg:text-[1.4rem]"
           >
-            {link}
+            {link.label}
           </a>
         ))}
       </FadeIn>
@@ -38,7 +45,7 @@ export default function HeroSection() {
           y={40}
           className="hero-heading mt-6 w-full whitespace-nowrap text-center text-[14vw] font-black uppercase leading-none tracking-tight sm:mt-4 sm:text-[15vw] md:-mt-5 md:text-[16vw] lg:text-[17.5vw]"
         >
-          Hi, i&apos;m jack
+          Hi, i&apos;m igone
         </FadeIn>
       </div>
 
@@ -53,7 +60,7 @@ export default function HeroSection() {
         <FadeIn delay={0.6} y={30}>
           <img
             src={PORTRAIT_URL}
-            alt="Jack"
+            alt="Igone Nogales — nyma studio"
             className="pointer-events-none w-full select-none"
             draggable={false}
           />
@@ -66,10 +73,10 @@ export default function HeroSection() {
           as="p"
           delay={0.35}
           y={20}
-          className="max-w-[160px] font-light uppercase leading-snug tracking-wide text-[#D7E2EA] sm:max-w-[220px] md:max-w-[260px]"
+          className="max-w-[160px] font-light uppercase leading-snug tracking-wide text-[#D7E2EA] sm:max-w-[220px] md:max-w-[280px]"
           style={{ fontSize: 'clamp(0.75rem, 1.4vw, 1.5rem)' }}
         >
-          a 3d creator driven by crafting striking and unforgettable projects
+          desarrolladora web y diseñadora gráfica freelance — nyma studio
         </FadeIn>
 
         <FadeIn delay={0.5} y={20}>

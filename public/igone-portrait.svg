@@ -1,0 +1,16 @@
+<svg width="520" height="640" viewBox="0 0 520 640" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Retrato de Igone (placeholder)">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#646973"/>
+      <stop offset="1" stop-color="#BBCCD7"/>
+    </linearGradient>
+  </defs>
+  <!-- soft frame -->
+  <rect x="40" y="40" width="440" height="560" rx="56" fill="#141414" stroke="#2A2E33" stroke-width="2"/>
+  <!-- bust silhouette -->
+  <g fill="url(#g)">
+    <circle cx="260" cy="250" r="110"/>
+    <path d="M120 600c0-104 63-188 140-188s140 84 140 188H120z"/>
+  </g>
+  <text x="260" y="555" text-anchor="middle" font-family="Kanit, sans-serif" font-size="22" letter-spacing="6" fill="#0C0C0C" font-weight="700">IGONE</text>
+</svg>

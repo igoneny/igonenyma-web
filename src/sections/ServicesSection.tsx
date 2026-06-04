@@ -9,39 +9,34 @@ interface Service {
 const SERVICES: Service[] = [
   {
     number: '01',
-    name: '3D Modeling',
+    name: 'Diseño y desarrollo web',
     description:
-      'Creation of detailed objects, characters, or environments tailored to specific client needs, ideal for games, products, and visualizations.',
+      'Páginas web a medida, funcionales y atractivas, adaptadas a tu marca y pensadas para conectar con tu audiencia desde el primer clic.',
   },
   {
     number: '02',
-    name: 'Rendering',
+    name: 'Diseño gráfico y packaging',
     description:
-      'High-quality, photorealistic renders that showcase designs with custom lighting, textures, and materials to bring concepts to life.',
+      'Identidad visual, cartelería, papelería y packaging: doy forma a materiales gráficos que acompañan tu comunicación y hacen único tu producto.',
   },
   {
     number: '03',
-    name: 'Motion Design',
+    name: 'Automatizaciones',
     description:
-      'Dynamic animations and motion graphics that add energy and storytelling to brands, products, and digital experiences.',
+      'Flujos y procesos automatizados que te ahorran tiempo y conectan tus herramientas para que tu negocio funcione casi solo.',
   },
   {
     number: '04',
-    name: 'Branding',
+    name: 'IA para contenido audiovisual',
     description:
-      'Crafting cohesive visual identities — from logos to full brand systems — that communicate a clear and memorable presence.',
-  },
-  {
-    number: '05',
-    name: 'Web Design',
-    description:
-      'Designing clean, modern, and conversion-focused websites with attention to layout, typography, and user experience.',
+      'Creación de contenido audiovisual potenciado con IA: imágenes, vídeo y recursos que dan energía y narrativa a tu marca.',
   },
 ];
 
 export default function ServicesSection() {
   return (
     <section
+      id="servicios"
       className="rounded-t-[40px] px-5 py-20 sm:rounded-t-[50px] sm:px-8 sm:py-24 md:rounded-t-[60px] md:px-10 md:py-32"
       style={{ background: '#FFFFFF' }}
     >
@@ -49,7 +44,7 @@ export default function ServicesSection() {
         className="mb-16 text-center font-black uppercase sm:mb-20 md:mb-28"
         style={{ color: '#0C0C0C', fontSize: 'clamp(3rem, 12vw, 160px)' }}
       >
-        Services
+        Servicios
       </h2>
 
       <div className="mx-auto max-w-5xl">

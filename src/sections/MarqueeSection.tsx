@@ -1,41 +1,53 @@
 import { useEffect, useRef, useState } from 'react';
 
-const IMAGES = [
-  'https://motionsites.ai/assets/hero-space-voyage-preview-eECLH3Yc.gif',
-  'https://motionsites.ai/assets/hero-codenest-preview-Cgppc2qV.gif',
-  'https://motionsites.ai/assets/hero-vex-ventures-preview-BczMFIiw.gif',
-  'https://motionsites.ai/assets/hero-stellar-ai-v2-preview-DjvxjG3C.gif',
-  'https://motionsites.ai/assets/hero-asme-preview-B_nGDnTP.gif',
-  'https://motionsites.ai/assets/hero-transform-data-preview-Cx5OU29N.gif',
-  'https://motionsites.ai/assets/hero-vitara-preview-Cjz2QYyU.gif',
-  'https://motionsites.ai/assets/hero-terra-preview-BFjrCr7T.gif',
-  'https://motionsites.ai/assets/hero-skyelite-preview-DHaZIgUv.gif',
-  'https://motionsites.ai/assets/hero-aethera-preview-DknSlcTa.gif',
-  'https://motionsites.ai/assets/hero-designpro-preview-D8c5_een.gif',
-  'https://motionsites.ai/assets/hero-stellar-ai-preview-D3HL6bw1.gif',
-  'https://motionsites.ai/assets/hero-xportfolio-preview-D4A8maiC.gif',
-  'https://motionsites.ai/assets/hero-orbit-web3-preview-BXt4OttD.gif',
-  'https://motionsites.ai/assets/hero-nexora-preview-cx5HmUgo.gif',
-  'https://motionsites.ai/assets/hero-evr-ventures-preview-DZxeVFEX.gif',
-  'https://motionsites.ai/assets/hero-planet-orbit-preview-DWAP8Z1P.gif',
-  'https://motionsites.ai/assets/hero-new-era-preview-CocuDUm9.gif',
-  'https://motionsites.ai/assets/hero-wealth-preview-B70idl_u.gif',
-  'https://motionsites.ai/assets/hero-luminex-preview-CxOP7ce6.gif',
-  'https://motionsites.ai/assets/hero-celestia-preview-0yO3jXO8.gif',
+interface WorkTile {
+  name: string;
+  category: string;
+  year: string;
+  from: string;
+  to: string;
+}
+
+// Your real projects as a scrolling work band. Swap these tiles for image
+// thumbnails once you upload the project mockups (public/projects/*.png).
+const WORK: WorkTile[] = [
+  { name: 'Pro Active Trainer', category: 'Web', year: '2024', from: '#18011F', to: '#7621B0' },
+  { name: 'Bikain', category: 'Restaurante · Web', year: '2025', from: '#1A1A1A', to: '#3A3A3A' },
+  { name: 'Nutraide', category: 'Centro de nutrición', year: '2025', from: '#0E2A1F', to: '#1F7A55' },
+  { name: 'Digital Developers', category: 'Web', year: '2024', from: '#0C1430', to: '#2747B0' },
+  { name: 'kiddyss', category: 'E-commerce', year: '2024', from: '#2A1410', to: '#BE4C00' },
+  { name: 'chetto shoes', category: 'Packaging', year: '2024', from: '#2A0A26', to: '#B600A8' },
+  { name: 'Condrys', category: 'Identidad · Packaging', year: '2024', from: '#2A1A05', to: '#C98A1E' },
+  { name: 'borjas design', category: 'Identidad', year: '2024', from: '#1A0A2A', to: '#7721B1' },
+  { name: 'Automatizaciones e IA', category: 'IA · Workflows', year: '2024–25', from: '#06121A', to: '#1E6E8C' },
 ];
 
-const ROW_ONE = [...IMAGES.slice(0, 11), ...IMAGES.slice(0, 11), ...IMAGES.slice(0, 11)];
-const ROW_TWO = [...IMAGES.slice(11), ...IMAGES.slice(11), ...IMAGES.slice(11)];
+const ROW_ONE = [...WORK.slice(0, 5), ...WORK.slice(0, 5), ...WORK.slice(0, 5)];
+const ROW_TWO = [...WORK.slice(5), ...WORK.slice(5), ...WORK.slice(5)];
 
-function Tile({ src }: { src: string }) {
+function Tile({ tile }: { tile: WorkTile }) {
   return (
-    <img
-      src={src}
-      alt=""
-      loading="lazy"
-      className="rounded-2xl object-cover"
-      style={{ width: '420px', height: '270px', flex: '0 0 auto' }}
-    />
+    <div
+      className="flex flex-col justify-between rounded-2xl p-6"
+      style={{
+        width: '420px',
+        height: '270px',
+        flex: '0 0 auto',
+        background: `linear-gradient(135deg, ${tile.from} 0%, ${tile.to} 100%)`,
+      }}
+    >
+      <div className="flex items-center justify-between">
+        <span className="text-sm font-light uppercase tracking-widest text-white/70">
+          {tile.category}
+        </span>
+        <span className="text-sm font-light tracking-widest text-white/70">
+          {tile.year}
+        </span>
+      </div>
+      <span className="font-black uppercase leading-none text-white" style={{ fontSize: 'clamp(1.6rem, 3vw, 2.6rem)' }}>
+        {tile.name}
+      </span>
+    </div>
   );
 }
 
@@ -48,8 +60,7 @@ export default function MarqueeSection() {
       const el = sectionRef.current;
       if (!el) return;
       const sectionTop = el.offsetTop;
-      const next =
-        (window.scrollY - sectionTop + window.innerHeight) * 0.3;
+      const next = (window.scrollY - sectionTop + window.innerHeight) * 0.3;
       setOffset(next);
     };
 
@@ -68,26 +79,20 @@ export default function MarqueeSection() {
         {/* Row 1 — scrolls right */}
         <div
           className="flex gap-3"
-          style={{
-            transform: `translateX(${offset - 200}px)`,
-            willChange: 'transform',
-          }}
+          style={{ transform: `translateX(${offset - 200}px)`, willChange: 'transform' }}
         >
-          {ROW_ONE.map((src, i) => (
-            <Tile key={`r1-${i}`} src={src} />
+          {ROW_ONE.map((tile, i) => (
+            <Tile key={`r1-${i}`} tile={tile} />
           ))}
         </div>
 
         {/* Row 2 — scrolls left */}
         <div
           className="flex gap-3"
-          style={{
-            transform: `translateX(${-(offset - 200)}px)`,
-            willChange: 'transform',
-          }}
+          style={{ transform: `translateX(${-(offset - 200)}px)`, willChange: 'transform' }}
         >
-          {ROW_TWO.map((src, i) => (
-            <Tile key={`r2-${i}`} src={src} />
+          {ROW_TWO.map((tile, i) => (
+            <Tile key={`r2-${i}`} tile={tile} />
           ))}
         </div>
       </div>

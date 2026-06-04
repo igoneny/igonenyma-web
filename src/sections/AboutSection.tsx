@@ -9,15 +9,16 @@ const LEGO = `${ASSET}/lego_icon-1.703bb594.png`;
 const GROUP = `${ASSET}/Group_134-1.2e04f3ce.png`;
 
 const PARAGRAPH =
-  "With more than five years of experience in design, i focus on branding, web design, and user experience, i truly enjoy working with businesses that aim to stand out and present their best image. Let's build something incredible together!";
+  'Me apasiona crear, diseñar y aportar soluciones creativas y funcionales que no solo se vean bien, sino que también resuelvan problemas, cuenten historias y generen impacto. Además del diseño, disfruto de viajar, del tiempo en familia y la naturaleza, ya sea en la montaña o la playa. Estas me inspiran y alimentan mi creatividad.';
 
 export default function AboutSection() {
   return (
     <section
+      id="sobre-mi"
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-5 py-20 sm:px-8 md:px-10"
       style={{ background: '#0C0C0C' }}
     >
-      {/* Decorative corner 3D images */}
+      {/* Decorative corner 3D objects */}
       <FadeIn
         delay={0.1}
         x={-80}
@@ -68,12 +69,12 @@ export default function AboutSection() {
             className="hero-heading text-center font-black uppercase leading-none tracking-tight"
             style={{ fontSize: 'clamp(3rem, 12vw, 160px)' }}
           >
-            About me
+            Sobre mí
           </FadeIn>
 
           <AnimatedText
             text={PARAGRAPH}
-            className="max-w-[560px] text-center font-medium leading-relaxed text-[#D7E2EA]"
+            className="max-w-[640px] text-center font-medium leading-relaxed text-[#D7E2EA]"
             style={{ fontSize: 'clamp(1rem, 2vw, 1.35rem)' }}
           />
         </div>
