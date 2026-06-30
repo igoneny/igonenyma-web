@@ -4,7 +4,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        kanit: ['Kanit', 'sans-serif'],
+        archivo: ['Archivo', 'sans-serif'],
+      },
+      colors: {
+        bone: '#F0EEE8',
+        ink: '#0F0F0F',
       },
     },
   },

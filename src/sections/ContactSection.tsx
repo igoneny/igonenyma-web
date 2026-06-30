@@ -1,9 +1,14 @@
-import { Mail, MessageCircle } from 'lucide-react';
 import FadeIn from '../components/FadeIn';
 
 const EMAIL = 'igonenyma@gmail.com';
 const WHATSAPP_DISPLAY = '623 766 678';
 const WHATSAPP_LINK = 'https://wa.me/34623766678';
+
+const QUICK_LINKS = [
+  { label: 'Sobre mí', href: '#sobre-mi' },
+  { label: 'Servicios', href: '#servicios' },
+  { label: 'Proyectos', href: '#proyectos' },
+];
 
 const SOCIALS = [
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/igone-nogales-yeregui/' },
@@ -12,63 +17,80 @@ const SOCIALS = [
 ];
 
 const pill =
-  'flex items-center gap-3 rounded-full border-2 border-white px-7 py-3 text-sm font-medium uppercase tracking-widest text-white transition-colors duration-200 hover:bg-white/10 sm:text-base';
+  'inline-flex items-center rounded-full border border-bone/30 px-6 py-3 text-sm font-medium uppercase tracking-[0.12em] text-bone transition-colors duration-200 hover:bg-bone hover:text-ink';
 
 export default function ContactSection() {
   return (
-    <section
+    <footer
       id="contacto"
-      className="flex flex-col items-center px-5 py-24 sm:px-8 sm:py-28 md:px-10 md:py-36"
-      style={{ background: '#000000' }}
+      className="mt-10 rounded-t-[36px] bg-ink px-5 pb-10 pt-20 text-bone sm:px-8 sm:rounded-t-[48px] md:px-12 md:pb-12 md:pt-28"
     >
-      <FadeIn
-        as="p"
-        delay={0}
-        y={20}
-        className="mb-6 text-center font-light uppercase tracking-widest text-white sm:mb-8"
-        style={{ fontSize: 'clamp(0.9rem, 1.6vw, 1.4rem)' }}
-      >
-        ¿Trabajamos juntos?
+      <FadeIn as="h2" delay={0} y={30} className="display text-bone" >
+        <span style={{ fontSize: 'clamp(3.5rem, 16vw, 16rem)' }}>Let&apos;s talk.</span>
       </FadeIn>
 
-      <FadeIn delay={0.1} y={30}>
-        <a
-          href={`mailto:${EMAIL}`}
-          className="hero-heading block break-all text-center font-black uppercase leading-none tracking-tight transition-opacity duration-200 hover:opacity-80"
-          style={{ fontSize: 'clamp(2rem, 8vw, 110px)' }}
-        >
+      <FadeIn
+        delay={0.1}
+        y={20}
+        className="mt-8 flex flex-wrap gap-3 sm:mt-12"
+      >
+        <a href={`mailto:${EMAIL}`} className={pill}>
           {EMAIL}
         </a>
-      </FadeIn>
-
-      <FadeIn
-        delay={0.2}
-        y={20}
-        className="mt-12 flex flex-wrap items-center justify-center gap-4 sm:mt-16 sm:gap-5"
-      >
         <a href={WHATSAPP_LINK} target="_blank" rel="noreferrer" className={pill}>
-          <MessageCircle size={20} />
           WhatsApp · {WHATSAPP_DISPLAY}
         </a>
-        <a href={`mailto:${EMAIL}`} className={pill}>
-          <Mail size={20} />
-          Email
-        </a>
-        {SOCIALS.map((s) => (
-          <a key={s.label} href={s.href} target="_blank" rel="noreferrer" className={pill}>
-            {s.label}
-          </a>
-        ))}
       </FadeIn>
 
-      <FadeIn
-        as="p"
-        delay={0.3}
-        y={10}
-        className="mt-16 text-center text-xs font-light uppercase tracking-widest text-white/40 sm:mt-20"
-      >
+      <div className="mt-16 grid gap-10 border-t border-bone/15 pt-10 sm:grid-cols-2 md:mt-24 md:grid-cols-4">
+        <div className="sm:col-span-2 md:col-span-2">
+          <p className="text-2xl font-bold leading-tight md:text-3xl">
+            nyma studio
+          </p>
+          <p className="mt-2 text-sm uppercase tracking-[0.15em] text-bone/50">
+            Igone Nogales · freelance
+          </p>
+        </div>
+
+        <div>
+          <p className="mb-4 text-xs uppercase tracking-[0.2em] text-bone/40">
+            / Navegación
+          </p>
+          <ul className="space-y-2">
+            {QUICK_LINKS.map((l) => (
+              <li key={l.href}>
+                <a href={l.href} className="text-bone/80 transition-colors hover:text-bone">
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <p className="mb-4 text-xs uppercase tracking-[0.2em] text-bone/40">
+            / Redes
+          </p>
+          <ul className="space-y-2">
+            {SOCIALS.map((s) => (
+              <li key={s.label}>
+                <a
+                  href={s.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-bone/80 transition-colors hover:text-bone"
+                >
+                  {s.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <p className="mt-12 text-xs uppercase tracking-[0.15em] text-bone/40">
         nyma studio — Igone Nogales · Todos los derechos reservados
-      </FadeIn>
-    </section>
+      </p>
+    </footer>
   );
 }
