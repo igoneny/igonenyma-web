@@ -1,5 +1,4 @@
-import HeroSection from './sections/HeroSection';
-import AboutSection from './sections/AboutSection';
+import HeroAboutSection from './sections/HeroAboutSection';
 import StatementSection from './sections/StatementSection';
 import ServicesSection from './sections/ServicesSection';
 import ProjectsSection from './sections/ProjectsSection';
@@ -9,8 +8,7 @@ import ContactSection from './sections/ContactSection';
 export default function App() {
   return (
     <main style={{ background: '#F0EEE8', overflowX: 'clip' }}>
-      <HeroSection />
-      <AboutSection />
+      <HeroAboutSection />
       <StatementSection />
       <ServicesSection />
       <ProjectsSection />
