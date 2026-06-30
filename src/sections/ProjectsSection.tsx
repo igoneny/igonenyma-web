@@ -14,7 +14,7 @@ const PROJECTS: Project[] = [
   { name: 'Digital Developers', category: 'Identidad & Web', image: '/digitaldev-02.png', link: 'https://digitaldevelopers.es/' },
   { name: 'Buy from Argentina', category: 'Identidad & Web', image: '/buyfrom-03.png', link: 'https://buyfromargentina.com/' },
   { name: 'Chetto', category: 'Packaging', image: '/chetto-cajas-01.png' },
-  { name: 'Chetto', category: 'Stands' }, // image pending upload
+  { name: 'Chetto', category: 'Stands', image: '/chetto-stand.jpeg' },
   { name: 'Condrys', category: 'Identidad & Packaging', image: '/condrys-01.png' },
 ];
 
