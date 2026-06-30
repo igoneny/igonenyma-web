@@ -1,6 +1,10 @@
 node_modules
 dist
+dist-single
 dist-ssr
+vite.singlefile.config.ts
+nyma-studio-preview.html
+nyma-studio-web.zip
 *.local
 .DS_Store
 .vite
