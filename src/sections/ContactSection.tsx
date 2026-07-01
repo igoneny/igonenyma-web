@@ -25,8 +25,14 @@ export default function ContactSection() {
       id="contacto"
       className="mt-10 rounded-t-[36px] bg-ink px-5 pb-10 pt-20 text-bone sm:px-8 sm:rounded-t-[48px] md:px-12 md:pb-12 md:pt-28"
     >
-      <FadeIn as="h2" delay={0} y={30} className="display text-bone" >
-        <span style={{ fontSize: 'clamp(3.5rem, 16vw, 16rem)' }}>Let&apos;s talk.</span>
+      <FadeIn
+        as="h2"
+        delay={0}
+        y={30}
+        className="display whitespace-nowrap text-bone"
+        style={{ fontSize: 'clamp(2.5rem, 12vw, 7.5rem)' }}
+      >
+        Let&apos;s talk.
       </FadeIn>
 
       <FadeIn

@@ -40,6 +40,8 @@ export default function HeroAboutSection() {
     offset: ['start start', 'end end'],
   });
   const y = useTransform(scrollYProgress, [0, 0.5], [-travel, 0]);
+  // Full 360° spin as it descends, landing upright.
+  const rotate = useTransform(scrollYProgress, [0, 0.5], [0, 360]);
 
   return (
     <div ref={wrapRef} className="relative">
@@ -106,7 +108,7 @@ export default function HeroAboutSection() {
           {/* Desktop only: portrait rests centered between the paragraphs */}
           <div className="pointer-events-none absolute left-1/2 top-1/2 z-30 hidden -translate-x-1/2 -translate-y-1/2 md:block">
             <div ref={restAnchorRef}>
-              <motion.div style={{ y }}>
+              <motion.div style={{ y, rotate }}>
                 <img
                   src={PORTRAIT}
                   alt="Igone Nogales"
