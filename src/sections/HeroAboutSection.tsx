@@ -55,7 +55,7 @@ export default function HeroAboutSection() {
       {/* HERO */}
       <section className="relative flex min-h-screen flex-col px-5 pb-10 pt-7 sm:px-8 md:px-12 md:pt-9">
         <FadeIn as="div" delay={0} y={-12} className="text-sm font-semibold uppercase tracking-[0.15em]">
-          nyma studio
+          Igone Nogales
         </FadeIn>
 
         <div className="relative flex flex-1 flex-col items-center justify-center gap-8 md:items-stretch md:gap-0">
@@ -97,7 +97,8 @@ export default function HeroAboutSection() {
       {/* ABOUT */}
       <section id="sobre-mi" className="px-5 py-24 sm:px-8 md:px-12 md:py-32">
         <AnimatedText
-          text="Hey!"
+          as="h2"
+          text="Hola!"
           className="display text-ink"
           style={{ fontSize: 'clamp(2.25rem, 7vw, 5rem)' }}
         />

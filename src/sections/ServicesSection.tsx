@@ -33,9 +33,10 @@ export default function ServicesSection() {
   return (
     <section id="servicios" className="px-5 py-20 sm:px-8 md:px-12 md:py-28">
       <AnimatedText
-        text="Services"
+        as="h2"
+        text="Servicios"
         className="display text-ink"
-        style={{ fontSize: 'clamp(3rem, 12vw, 11rem)' }}
+        style={{ fontSize: 'clamp(1.5rem, 10vw, 4rem)' }}
       />
 
       <div className="mt-10 border-t border-ink/15 md:mt-16">

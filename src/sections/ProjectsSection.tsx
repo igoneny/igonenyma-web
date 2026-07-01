@@ -58,9 +58,10 @@ export default function ProjectsSection() {
   return (
     <section id="proyectos" className="px-5 py-20 sm:px-8 md:px-12 md:py-28">
       <AnimatedText
-        text="Featured Projects"
+        as="h2"
+        text="Proyectos destacados"
         className="display text-ink"
-        style={{ fontSize: 'clamp(2.6rem, 10vw, 9rem)' }}
+        style={{ fontSize: 'clamp(1.5rem, 10vw, 4rem)' }}
       />
 
       <div className="mt-12 grid gap-x-6 gap-y-12 md:mt-16 md:grid-cols-2 md:gap-x-8 md:gap-y-16">

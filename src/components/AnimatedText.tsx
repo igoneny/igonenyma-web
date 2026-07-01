@@ -1,12 +1,13 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Fragment, useRef } from 'react';
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ElementType } from 'react';
 import type { MotionValue } from 'framer-motion';
 
 interface AnimatedTextProps {
   text: string;
   className?: string;
   style?: CSSProperties;
+  as?: ElementType;
 }
 
 /**
@@ -19,8 +20,9 @@ export default function AnimatedText({
   text,
   className,
   style,
+  as: Tag = 'p',
 }: AnimatedTextProps) {
-  const container = useRef<HTMLParagraphElement>(null);
+  const container = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ['start 0.8', 'end 0.2'],
@@ -29,7 +31,7 @@ export default function AnimatedText({
   const words = text.split(' ');
 
   return (
-    <p ref={container} className={className} style={style}>
+    <Tag ref={container} className={className} style={style}>
       {words.map((word, i) => {
         const start = i / words.length;
         const end = start + 1 / words.length;
@@ -42,7 +44,7 @@ export default function AnimatedText({
           </Fragment>
         );
       })}
-    </p>
+    </Tag>
   );
 }
 

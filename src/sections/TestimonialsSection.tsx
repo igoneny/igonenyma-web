@@ -37,9 +37,10 @@ export default function TestimonialsSection() {
   return (
     <section className="px-5 py-20 sm:px-8 md:px-12 md:py-28">
       <AnimatedText
-        text="Testimonials"
+        as="h2"
+        text="Testimonios"
         className="display text-ink"
-        style={{ fontSize: 'clamp(2.6rem, 11vw, 10rem)' }}
+        style={{ fontSize: 'clamp(1.5rem, 10vw, 4rem)' }}
       />
 
       <div className="mt-12 grid gap-5 md:mt-16 md:grid-cols-2 lg:grid-cols-4">
