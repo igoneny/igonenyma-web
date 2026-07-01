@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import FadeIn from '../components/FadeIn';
 import AnimatedText from '../components/AnimatedText';
 
@@ -39,9 +39,16 @@ export default function HeroAboutSection() {
     target: wrapRef,
     offset: ['start start', 'end end'],
   });
-  const y = useTransform(scrollYProgress, [0, 0.5], [-travel, 0]);
-  // Full 360° spin as it descends, landing upright.
-  const rotate = useTransform(scrollYProgress, [0, 0.5], [0, 360]);
+  // Smooth the raw scroll value for a fluid, eased travel.
+  const smooth = useSpring(scrollYProgress, {
+    stiffness: 70,
+    damping: 20,
+    mass: 0.5,
+  });
+  const y = useTransform(smooth, [0, 0.5], [-travel, 0]);
+  // Full 360° spin as it descends, landing upright, and grows as it settles.
+  const rotate = useTransform(smooth, [0, 0.5], [0, 360]);
+  const scale = useTransform(smooth, [0, 0.5], [0.7, 1]);
 
   return (
     <div ref={wrapRef} className="relative">
@@ -53,7 +60,7 @@ export default function HeroAboutSection() {
 
         <div className="relative flex flex-1 flex-col items-center justify-center gap-8 md:items-stretch md:gap-0">
           <FadeIn as="div" delay={0.1} y={30}>
-            <h1 className="display text-center text-[16vw] leading-[0.82] sm:text-left sm:text-[16vw] lg:text-[15vw]">
+            <h1 className="display text-center text-[16vw] leading-[0.82] lg:text-[15vw]">
               Graphic
               <br />
               Designer
@@ -92,7 +99,7 @@ export default function HeroAboutSection() {
         <AnimatedText
           text="Hey!"
           className="display text-ink"
-          style={{ fontSize: 'clamp(4rem, 16vw, 15rem)' }}
+          style={{ fontSize: 'clamp(2.25rem, 7vw, 5rem)' }}
         />
 
         <div className="relative mt-10 grid items-center gap-8 md:mt-16 md:grid-cols-12 md:gap-12">
@@ -108,11 +115,11 @@ export default function HeroAboutSection() {
           {/* Desktop only: portrait rests centered between the paragraphs */}
           <div className="pointer-events-none absolute left-1/2 top-1/2 z-30 hidden -translate-x-1/2 -translate-y-1/2 md:block">
             <div ref={restAnchorRef}>
-              <motion.div style={{ y, rotate }}>
+              <motion.div style={{ y, rotate, scale }}>
                 <img
                   src={PORTRAIT}
                   alt="Igone Nogales"
-                  className="aspect-[3/4] w-[190px] rounded-2xl object-cover shadow-2xl lg:w-[220px]"
+                  className="aspect-[3/4] w-[250px] rounded-2xl object-cover shadow-2xl lg:w-[300px]"
                   draggable={false}
                 />
               </motion.div>
