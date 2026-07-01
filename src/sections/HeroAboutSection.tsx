@@ -11,13 +11,15 @@ export default function HeroAboutSection() {
   const restAnchorRef = useRef<HTMLDivElement>(null);
   const [travel, setTravel] = useState(0);
 
-  // Measure how far (px) the portrait must travel from its hero spot down to
-  // its resting spot between the About paragraphs.
+  // Distance (px) the desktop portrait travels from the hero down to its
+  // resting spot between the About paragraphs.
   useEffect(() => {
     const measure = () => {
       const hero = heroAnchorRef.current;
       const rest = restAnchorRef.current;
       if (!hero || !rest) return;
+      // both are hidden below md — skip when not laid out
+      if (hero.offsetParent === null && rest.offsetParent === null) return;
       const heroY = hero.getBoundingClientRect().top + window.scrollY;
       const restY = rest.getBoundingClientRect().top + window.scrollY;
       setTravel(restY - heroY);
@@ -37,8 +39,6 @@ export default function HeroAboutSection() {
     target: wrapRef,
     offset: ['start start', 'end end'],
   });
-  // Portrait sits at the About rest spot; lift it up into the hero at scroll 0
-  // and let it descend to 0 by the time we reach the About block.
   const y = useTransform(scrollYProgress, [0, 0.5], [-travel, 0]);
 
   return (
@@ -49,26 +49,37 @@ export default function HeroAboutSection() {
           nyma studio
         </FadeIn>
 
-        <div className="relative flex flex-1 flex-col justify-center">
+        <div className="relative flex flex-1 flex-col items-center justify-center gap-8 md:items-stretch md:gap-0">
           <FadeIn as="div" delay={0.1} y={30}>
-            <h1 className="display text-center text-[19vw] leading-[0.82] sm:text-left sm:text-[17vw] lg:text-[16vw]">
+            <h1 className="display text-center text-[16vw] leading-[0.82] sm:text-left sm:text-[16vw] lg:text-[15vw]">
               Graphic
               <br />
               Designer
             </h1>
           </FadeIn>
-          {/* invisible marker: where the portrait sits while in the hero */}
+
+          {/* Mobile: static portrait below the headline */}
+          <FadeIn delay={0.4} y={20} className="md:hidden">
+            <img
+              src={PORTRAIT}
+              alt="Igone Nogales"
+              className="aspect-[3/4] w-[170px] rounded-2xl object-cover shadow-2xl"
+              draggable={false}
+            />
+          </FadeIn>
+
+          {/* Desktop anchor: where the travelling portrait sits while in the hero */}
           <div
             ref={heroAnchorRef}
-            className="pointer-events-none absolute left-1/2 top-1/2 h-0 w-0"
+            className="pointer-events-none absolute left-1/2 top-1/2 hidden h-0 w-0 md:block"
           />
         </div>
 
-        <div className="flex items-end justify-between gap-4 text-[10px] font-medium uppercase tracking-[0.2em] opacity-50 sm:text-xs">
+        <div className="flex flex-col items-center gap-1 text-center text-[11px] font-medium uppercase tracking-[0.2em] opacity-50 sm:flex-row sm:items-end sm:justify-between sm:gap-4 sm:text-xs">
           <FadeIn as="div" delay={0.25} y={20}>
             portfolio 2026
           </FadeIn>
-          <FadeIn as="div" delay={0.35} y={20} className="text-right">
+          <FadeIn as="div" delay={0.35} y={20} className="sm:text-right">
             /creating since 2016
           </FadeIn>
         </div>
@@ -92,17 +103,14 @@ export default function HeroAboutSection() {
             Soy Igone, desarrolladora web y diseñadora gráfica freelance.
           </FadeIn>
 
-          {/* mobile spacer so the resting portrait doesn't overlap text */}
-          <div className="h-[150px] md:hidden" aria-hidden />
-
-          {/* resting slot (centered between the two paragraphs) */}
-          <div className="pointer-events-none absolute left-1/2 top-1/2 z-30 -translate-x-1/2 -translate-y-1/2">
+          {/* Desktop only: portrait rests centered between the paragraphs */}
+          <div className="pointer-events-none absolute left-1/2 top-1/2 z-30 hidden -translate-x-1/2 -translate-y-1/2 md:block">
             <div ref={restAnchorRef}>
               <motion.div style={{ y }}>
                 <img
                   src={PORTRAIT}
                   alt="Igone Nogales"
-                  className="aspect-[3/4] w-[150px] rounded-2xl object-cover shadow-2xl sm:w-[180px] md:w-[220px]"
+                  className="aspect-[3/4] w-[190px] rounded-2xl object-cover shadow-2xl lg:w-[220px]"
                   draggable={false}
                 />
               </motion.div>
