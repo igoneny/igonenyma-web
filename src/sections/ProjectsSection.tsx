@@ -18,7 +18,7 @@ export default function ProjectsSection() {
             <a href={`#/proyecto/${project.slug}`} className="block">
               <div className="aspect-[16/10] overflow-hidden rounded-3xl bg-ink/5">
                 <img
-                  src={project.hero}
+                  src={project.thumb ?? project.hero}
                   alt={`${project.name} — ${project.category}`}
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"

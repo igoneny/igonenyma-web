@@ -15,6 +15,7 @@ export interface Project {
     client?: string;
   };
   description: string;
+  thumb?: string; // home grid thumbnail (falls back to `hero`)
   hero: string;
   gallery: GalleryItem[];
 }
@@ -94,8 +95,13 @@ export const PROJECTS: Project[] = [
     meta: { published: '2024', services: 'Identidad + Packaging', sector: 'Alimentación', client: 'Condrys' },
     description:
       'Identidad y packaging para Condrys. Un sistema apetecible y natural que da personalidad al producto y lo hace destacar en el lineal.',
-    hero: '/condrys-01.png',
-    gallery: [{ src: '/condrys-01.png', wide: true }, {}, {}],
+    thumb: '/aplicacion-02-ok.jpeg',
+    hero: '/condrys-granola-ok.jpg',
+    gallery: [
+      { src: '/condrys-cabecera.png', wide: true },
+      { src: '/aplicacion-02-ok.jpeg' },
+      { src: '/brandboard-2026.png' },
+    ],
   },
 ];
 
