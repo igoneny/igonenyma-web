@@ -84,6 +84,7 @@ export default function ProjectPage({ project }: { project: Project }) {
       </section>
 
       {/* Gallery */}
+      {project.gallery.length > 0 && (
       <section className="px-3 pb-16 sm:px-4 md:pb-24">
         <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
           {project.gallery.map((item, i) => (
@@ -116,6 +117,7 @@ export default function ProjectPage({ project }: { project: Project }) {
           ))}
         </div>
       </section>
+      )}
 
       <ContactSection />
     </>
