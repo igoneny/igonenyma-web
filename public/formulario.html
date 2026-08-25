@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Let's talk — Igone Nogales</title>
+<meta name="robots" content="noindex">
+
+<!-- Sustituye por las fuentes reales de tu web si no son estas -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Black&display=swap" rel="stylesheet">
+
+<style>
+/* ══════════════════════════════════════════════════════════════
+   1. TOKENS — tomados de igonenyma.es
+   ══════════════════════════════════════════════════════════════ */
+:root{
+  --paper:      #EDEBE8;   /* fondo hueso de tu web */
+  --ink:        #111111;   /* negro */
+  --muted:      #A5A29D;   /* el gris de "SERVICIOS" y "DESTACADOS" */
+  --line:       #D6D3CE;   /* hairlines de la lista de servicios */
+  --dark:       #0D0D0D;   /* bloque negro de "LET'S TALK." */
+  --on-dark:    #EDEBE8;
+  --error:      #B4442E;
+
+  --font-display: "Archivo Black", Helvetica, Arial, sans-serif;
+  --font-body:    "Archivo", Helvetica, Arial, sans-serif;
+
+  --max: 680px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   2. BASE
+   ══════════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--font-body);-webkit-font-smoothing:antialiased;
+  transition:background .5s ease,color .5s ease;
+}
+body.inverted{background:var(--dark);color:var(--on-dark)}
+button,input,textarea{font:inherit;color:inherit}
+
+.tf{position:relative;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+.tf__progress{position:fixed;top:0;left:0;right:0;height:3px;background:rgba(0,0,0,.08);z-index:5}
+.tf__progress i{display:block;height:100%;width:0;background:var(--ink);transition:width .5s cubic-bezier(.2,.7,.3,1)}
+body.inverted .tf__progress{background:rgba(255,255,255,.15)}
+body.inverted .tf__progress i{background:var(--on-dark)}
+
+.tf__stage{flex:1;display:flex;align-items:center;padding:96px 28px 32px}
+.tf__inner{width:100%;max-width:var(--max);margin:0 auto}
+
+.screen{animation:enter .5s cubic-bezier(.2,.7,.3,1) both}
+.screen.is-leaving{animation:leave .26s ease-in both}
+@keyframes enter{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes leave{to{opacity:0;transform:translateY(-16px)}}
+
+/* etiqueta al estilo "/ CREATING SINCE 2018" */
+.eyebrow{
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+  color:var(--muted);margin:0 0 20px;
+}
+
+/* pregunta: display pesado en mayúsculas, como los titulares del sitio */
+.q{
+  font-family:var(--font-display);font-weight:400;
+  font-size:clamp(30px,6.4vw,52px);line-height:.98;letter-spacing:-.025em;
+  text-transform:uppercase;margin:0;
+}
+.q .dim{color:inherit}
+.help{color:var(--muted);font-size:14.5px;line-height:1.55;margin:16px 0 0;max-width:46ch}
+
+/* campos: hairline como la tabla de servicios */
+.field{margin-top:36px;border-bottom:1px solid var(--line)}
+.field input,.field textarea{
+  width:100%;background:transparent;border:0;padding:12px 0;
+  font-size:21px;outline:none;
+}
+body.inverted .field{border-color:rgba(255,255,255,.25)}
+.field textarea{resize:none;line-height:1.5;min-height:96px}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted)}
+.field:focus-within{border-bottom-color:var(--ink)}
+
+/* opciones: filas con hairline, no cajas */
+.options{margin-top:32px;border-top:1px solid var(--line)}
+.opt{
+  display:flex;align-items:baseline;gap:18px;width:100%;text-align:left;
+  background:transparent;border:0;border-bottom:1px solid var(--line);
+  padding:20px 4px;cursor:pointer;font-size:19px;font-weight:600;
+  transition:padding-left .22s cubic-bezier(.2,.7,.3,1),color .18s;
+}
+.opt kbd{font:inherit;font-size:11px;font-weight:500;letter-spacing:.1em;color:var(--muted);min-width:16px}
+.opt em{font-style:normal;font-size:13px;font-weight:400;color:var(--muted);margin-left:auto;text-align:right;max-width:52%;line-height:1.4}
+.opt:hover{padding-left:16px}
+.opt:hover kbd{color:var(--ink)}
+.opt[aria-pressed="true"]{padding-left:16px}
+.opt[aria-pressed="true"] kbd::before{content:"→ ";color:var(--ink)}
+
+.consent{display:flex;gap:11px;align-items:flex-start;margin-top:26px;font-size:12.5px;color:var(--muted);line-height:1.5;cursor:pointer}
+.consent input{margin:1px 0 0;accent-color:var(--ink);width:15px;height:15px;flex:none}
+.consent a{color:var(--ink)}
+body.inverted .consent a{color:var(--on-dark)}
+
+/* botón píldora, como los de contacto del footer */
+.actions{display:flex;align-items:center;gap:18px;margin-top:36px;flex-wrap:wrap}
+.btn{
+  background:var(--ink);color:var(--paper);border:0;border-radius:99px;
+  padding:15px 32px;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  cursor:pointer;transition:opacity .18s,transform .18s;
+}
+.btn:hover{opacity:.85}
+.btn:active{transform:translateY(1px)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+.hint{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.err{color:var(--error);font-size:13.5px;margin-top:14px;min-height:19px}
+.err a{color:inherit}
+
+/* pie con las respuestas ya dadas */
+.tf__foot{
+  border-top:1px solid var(--line);padding:16px 28px;
+  display:flex;gap:8px;flex-wrap:wrap;align-items:center;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+}
+.chip{
+  border:1px solid var(--line);border-radius:99px;padding:7px 15px;background:transparent;
+  font:inherit;cursor:pointer;max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  transition:border-color .18s,color .18s;
+}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.tf__foot .back{margin-left:auto;background:none;border:0;font:inherit;color:var(--muted);cursor:pointer;text-decoration:underline;padding:6px 0}
+
+/* cierre: bloque negro, como "LET'S TALK." */
+.done .q{margin-bottom:20px}
+.done p{color:rgba(237,235,232,.65);font-size:16px;line-height:1.65;margin:0;max-width:44ch}
+.done b{color:var(--on-dark);font-weight:600}
+.done .pill{
+  display:inline-block;margin-top:32px;border:1px solid rgba(237,235,232,.35);border-radius:99px;
+  padding:13px 26px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--on-dark);text-decoration:none;transition:background .2s,color .2s;
+}
+.done .pill:hover{background:var(--on-dark);color:var(--dark)}
+
+:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+
+@media (max-width:560px){
+  .tf__stage{padding:76px 20px 24px}
+  .tf__foot{padding:14px 20px}
+  .field input,.field textarea{font-size:18px}
+  .opt{font-size:17px;gap:14px;padding:18px 2px}
+  .opt em{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<div class="tf">
+  <div class="tf__progress"><i id="bar"></i></div>
+  <main class="tf__stage"><div class="tf__inner" id="stage"></div></main>
+  <footer class="tf__foot" id="foot" hidden></footer>
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   3. CONFIGURACIÓN
+   ══════════════════════════════════════════════════════════════ */
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbyv9j2JzKcWkIlQ7tsC0Nj1i_2AtIwGVGr8oWgH23EOpubonw92Wf-x4L0cxNLnKftWPg/exec";
+const EMAIL_CONTACTO = "igonenyma@gmail.com";
+const WHATSAPP = "34623766678";   // sin + ni espacios
+
+const QUESTIONS = [
+  {
+    id:"nombre", type:"text", required:true,
+    title:"Hola. ¿Cómo <span class='dim'>te llamas?</span>",
+    placeholder:"Tu nombre"
+  },
+  {
+    id:"servicio", type:"choice", required:true,
+    title:"¿Qué <span class='dim'>necesitas?</span>",
+    options:[
+      {v:"Web",                   d:"Una página a medida, pensada para convertir."},
+      {v:"Diseño gráfico",        d:"Menús, cartelería, papelería, materiales."},
+      {v:"Identidad de marca",    d:"Una identidad visual completa, no solo un logo."},
+      {v:"IA y automatizaciones", d:"Contenido audiovisual y procesos que se resuelven solos."},
+      {v:"Varias cosas / aún no lo sé", d:"Lo vemos juntas."}
+    ]
+  },
+  {
+    id:"proyecto", type:"textarea", required:true,
+    title:"Cuéntamelo <span class='dim'>en dos líneas</span>",
+    help:"Qué es, para quién y en qué punto estás. Sin formalidades.",
+    placeholder:"Escribe aquí…"
+  },
+  {
+    id:"plazo", type:"choice", required:true,
+    title:"¿Para <span class='dim'>cuándo?</span>",
+    options:[
+      {v:"Cuanto antes"}, {v:"En 1 o 2 meses"},
+      {v:"Más adelante"}, {v:"Todavía no lo sé"}
+    ]
+  },
+  {
+    id:"email", type:"email", required:true, consent:true,
+    title:"¿Dónde <span class='dim'>te escribo?</span>",
+    help:"Te respondo en 24–48 h. Nada de listas de correo.",
+    placeholder:"tu@email.com"
+  }
+];
+
+/* ══════════════════════════════════════════════════════════════
+   4. LÓGICA
+   ══════════════════════════════════════════════════════════════ */
+const stage=document.getElementById("stage"),
+      foot =document.getElementById("foot"),
+      bar  =document.getElementById("bar"),
+      data ={};
+let i=0, sending=false;
+
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const n2  = n => String(n).padStart(2,"0");
+
+function render(){
+  const q=QUESTIONS[i], last=i===QUESTIONS.length-1;
+  let body="";
+
+  if(q.type==="choice"){
+    body=`<div class="options">`+q.options.map((o,n)=>
+      `<button type="button" class="opt" data-val="${esc(o.v)}" aria-pressed="${data[q.id]===o.v}">
+         <kbd>${n+1}</kbd><span>${esc(o.v)}</span>${o.d?`<em>${esc(o.d)}</em>`:""}
+       </button>`).join("")+`</div>`;
+  }else if(q.type==="textarea"){
+    body=`<div class="field"><textarea id="in" rows="3" placeholder="${esc(q.placeholder||"")}">${esc(data[q.id]||"")}</textarea></div>`;
+  }else{
+    body=`<div class="field"><input id="in" type="${q.type==="email"?"email":"text"}"
+      value="${esc(data[q.id]||"")}" placeholder="${esc(q.placeholder||"")}"
+      autocomplete="${q.type==="email"?"email":"name"}"></div>`;
+  }
+
+  const consent = q.consent ? `
+    <label class="consent">
+      <input type="checkbox" id="ok">
+      <span>Acepto la <a href="/privacidad" target="_blank" rel="noopener">política de privacidad</a>.
+      Igone usará estos datos solo para responder a esta consulta.</span>
+    </label>` : "";
+
+  stage.innerHTML=`
+    <section class="screen">
+      <p class="eyebrow">/ ${n2(i+1)} — ${n2(QUESTIONS.length)}</p>
+      <h1 class="q">${q.title}</h1>
+      ${q.help?`<p class="help">${esc(q.help)}</p>`:""}
+      ${body}
+      ${consent}
+      <div class="actions">
+        <button type="button" class="btn" id="next">${last?"Enviar":"Siguiente"}</button>
+        <span class="hint">${q.type==="textarea"?"Ctrl + Enter":"Enter ↵"}</span>
+      </div>
+      <p class="err" id="err"></p>
+    </section>`;
+
+  document.getElementById("next").onclick=submitStep;
+
+  if(q.type==="choice"){
+    stage.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+      data[q.id]=b.dataset.val;
+      stage.querySelectorAll(".opt").forEach(x=>x.setAttribute("aria-pressed",x===b));
+      setTimeout(submitStep,180);
+    });
+  }else{
+    const el=document.getElementById("in");
+    setTimeout(()=>el.focus({preventScroll:true}),60);
+    el.oninput=()=>{data[q.id]=el.value;document.getElementById("err").textContent="";};
+  }
+
+  bar.style.width=(i/QUESTIONS.length)*100+"%";
+  drawFoot();
+}
+
+function submitStep(){
+  const q=QUESTIONS[i], err=document.getElementById("err"), val=(data[q.id]||"").trim();
+  if(q.required&&!val){err.textContent="Necesito esto para poder seguir.";return;}
+  if(q.type==="email"&&!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(val)){
+    err.textContent="Revisa el email, parece que falta algo.";return;
+  }
+  const ok=document.getElementById("ok");
+  if(ok&&!ok.checked){err.textContent="Marca la casilla para que pueda escribirte.";return;}
+  if(i===QUESTIONS.length-1){send();return;}
+  go(i+1);
+}
+
+function go(n){
+  const s=stage.querySelector(".screen");
+  if(!s){i=n;render();return;}
+  s.classList.add("is-leaving");
+  setTimeout(()=>{i=n;render();},210);
+}
+
+function drawFoot(){
+  const done=QUESTIONS.slice(0,i).filter(q=>data[q.id]);
+  foot.hidden=done.length===0;
+  foot.innerHTML=done.map(q=>
+    `<button type="button" class="chip" data-i="${QUESTIONS.indexOf(q)}">${esc(data[q.id])}</button>`).join("")
+    +`<button type="button" class="back">← atrás</button>`;
+  foot.querySelectorAll(".chip").forEach(c=>c.onclick=()=>go(+c.dataset.i));
+  foot.querySelector(".back").onclick=()=>i>0&&go(i-1);
+}
+
+document.addEventListener("keydown",e=>{
+  const q=QUESTIONS[i];
+  if(!q||sending)return;
+  if(e.key==="Enter"){
+    if(e.target.tagName==="TEXTAREA"&&!(e.ctrlKey||e.metaKey))return;
+    e.preventDefault();submitStep();
+  }
+  if(q.type==="choice"&&/^[1-9]$/.test(e.key)){
+    const b=stage.querySelectorAll(".opt")[+e.key-1];
+    if(b)b.click();
+  }
+});
+
+async function send(){
+  if(sending)return;
+  sending=true;
+  const btn=document.getElementById("next");
+  btn.disabled=true;btn.textContent="Enviando…";
+
+  const payload={...data, web:"", origen:location.href,
+    fecha:new Date().toLocaleString("es-ES",{timeZone:"Europe/Madrid"})};
+
+  try{
+    // Sin cabecera Content-Type a propósito: evita el preflight CORS de Apps Script.
+    await fetch(ENDPOINT,{method:"POST",body:JSON.stringify(payload)});
+    finish();
+  }catch(err){
+    sending=false;btn.disabled=false;btn.textContent="Enviar";
+    document.getElementById("err").innerHTML=
+      `No he podido enviarlo. Prueba otra vez o escríbeme a <a href="mailto:${EMAIL_CONTACTO}">${EMAIL_CONTACTO}</a>.`;
+  }
+}
+
+function finish(){
+  document.body.classList.add("inverted");
+  bar.style.width="100%";
+  foot.hidden=true;
+  const nombre=(data.nombre||"").trim().split(" ")[0];
+  stage.innerHTML=`
+    <section class="screen done">
+      <p class="eyebrow">/ recibido</p>
+      <h1 class="q">Gracias, ${esc(nombre)}.<br><span class="dim">Hablamos pronto.</span></h1>
+      <p>Lo leo hoy o mañana y te contesto a <b>${esc(data.email)}</b>.
+         Si en 48 h no ves nada, echa un ojo a spam.</p>
+      <a class="pill" href="https://wa.me/${WHATSAPP}" target="_blank" rel="noopener">
+        ¿Prisa? Escríbeme por WhatsApp
+      </a>
+    </section>`;
+}
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# El formulario de presupuesto no debe competir en resultados con la home.
+Disallow: /formulario.html
+
+Sitemap: https://igonenyma.es/sitemap.xml

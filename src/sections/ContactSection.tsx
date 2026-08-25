@@ -3,6 +3,7 @@ import FadeIn from '../components/FadeIn';
 const EMAIL = 'igonenyma@gmail.com';
 const WHATSAPP_DISPLAY = '623 766 678';
 const WHATSAPP_LINK = 'https://wa.me/34623766678';
+const BUDGET_FORM = '/formulario.html';
 
 const QUICK_LINKS = [
   { label: 'Sobre mí', href: '#sobre-mi' },
@@ -45,6 +46,9 @@ export default function ContactSection() {
         </a>
         <a href={WHATSAPP_LINK} target="_blank" rel="noreferrer" className={pill}>
           WhatsApp · {WHATSAPP_DISPLAY}
+        </a>
+        <a href={BUDGET_FORM} className={pill}>
+          Pedir presupuesto
         </a>
       </FadeIn>
 
