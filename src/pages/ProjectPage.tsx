@@ -19,11 +19,11 @@ export default function ProjectPage({ project }: { project: Project }) {
     <>
       {/* Top bar */}
       <header className="flex items-center justify-between px-5 py-5 sm:px-8 md:px-12">
-        <a href="#/" className="text-sm font-semibold uppercase tracking-[0.15em]">
+        <a href="/" className="text-sm font-semibold uppercase tracking-[0.15em]">
           Igone Nogales
         </a>
         <a
-          href="#/"
+          href="/"
           className="text-sm font-medium uppercase tracking-[0.12em] opacity-60 transition-opacity hover:opacity-100"
         >
           ← Volver

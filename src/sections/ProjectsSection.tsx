@@ -1,6 +1,7 @@
 import FadeIn from '../components/FadeIn';
 import AnimatedText from '../components/AnimatedText';
 import { PROJECTS } from '../data/projects';
+import { projectUrl } from '../router';
 
 export default function ProjectsSection() {
   return (
@@ -15,7 +16,7 @@ export default function ProjectsSection() {
       <div className="mt-12 grid gap-x-6 gap-y-12 md:mt-16 md:grid-cols-2 md:gap-x-8 md:gap-y-16">
         {PROJECTS.map((project, i) => (
           <FadeIn key={project.slug} delay={(i % 2) * 0.08} y={28} className="group">
-            <a href={`#/proyecto/${project.slug}`} className="block">
+            <a href={projectUrl(project.slug)} className="block">
               <div className="aspect-[16/10] overflow-hidden rounded-3xl bg-ink/5">
                 <img
                   src={project.thumb ?? project.hero}
