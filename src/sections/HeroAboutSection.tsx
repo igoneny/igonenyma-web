@@ -46,8 +46,8 @@ export default function HeroAboutSection() {
     mass: 0.5,
   });
   const y = useTransform(smooth, [0, 0.5], [-travel, 0]);
-  // Full 360° spin as it descends, landing upright, and grows as it settles.
-  const rotate = useTransform(smooth, [0, 0.5], [0, 360]);
+  // Desciende con el scroll y crece al asentarse. Sin rotación: el muelle de
+  // arriba es quien da la sensación de suavidad.
   const scale = useTransform(smooth, [0, 0.5], [0.7, 1]);
 
   return (
@@ -116,7 +116,7 @@ export default function HeroAboutSection() {
           {/* Desktop only: portrait rests centered between the paragraphs */}
           <div className="pointer-events-none absolute left-1/2 top-1/2 z-30 hidden -translate-x-1/2 -translate-y-1/2 md:block">
             <div ref={restAnchorRef}>
-              <motion.div style={{ y, rotate, scale }}>
+              <motion.div style={{ y, scale }}>
                 <img
                   src={PORTRAIT}
                   alt="Igone Nogales"
